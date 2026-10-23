@@ -1,0 +1,3 @@
+import {readWishlist,readProducts,KEYS,safeSet} from './storage.js';
+import {productCard} from './products.js';
+export function renderWishlist(root){const list=readWishlist();const products=readProducts().filter(p=>list.includes(p.id));const missing=list.filter(id=>!readProducts().some(p=>p.id===id));if(missing.length)safeSet(KEYS.wishlist,list.filter(id=>!missing.includes(id)));root.innerHTML=products.length?products.map(productCard).join(''):`<div class="empty-state"><span class="empty-illustration">♡</span><h3>Belum ada produk favorit</h3><p>Tekan ikon hati pada produk untuk menyimpannya di wishlist.</p><a class="btn btn-primary" href="shop.html">Cari produk ↗</a></div>`;}
